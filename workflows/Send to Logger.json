@@ -1,0 +1,150 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "IF",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "IF": {
+      "main": [
+        [
+          {
+            "node": "Pushover",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-04-03T20:59:58.088Z",
+  "id": "1",
+  "name": "Send to Logger",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2f5c4f9e-3324-47ea-b89a-818108974d26",
+        "options": {}
+      },
+      "id": "9e9e4d88-0179-4be6-aecc-02f79a2ade9f",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ],
+      "webhookId": "2f5c4f9e-3324-47ea-b89a-818108974d26"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Log%20Message",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={\"message\":\"{{  encodeURIComponent( JSON.parse($json.body.data).msg) }}\",\"title\":{{$json.query.app}}, \"tag\": {{$json.query.app}}} "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "42ffc30f-0b35-44f0-b98a-d8d27793dee1",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        740,
+        520
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.data }}",
+              "value2": "\"\""
+            }
+          ]
+        }
+      },
+      "id": "604b9651-80d3-4b94-95d4-1832444b4a05",
+      "name": "IF",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        980,
+        540
+      ]
+    },
+    {
+      "parameters": {
+        "userKey": "QHZisq8iJ7ER6llndDxDcJBIrvkQo5",
+        "message": "Send To Logger failed",
+        "priority": 0,
+        "additionalFields": {}
+      },
+      "id": "6dc86ae0-b054-47b7-9c71-d36df0c817a3",
+      "name": "Pushover",
+      "type": "n8n-nodes-base.pushover",
+      "typeVersion": 1,
+      "position": [
+        1260,
+        600
+      ],
+      "credentials": {
+        "pushoverApi": {
+          "id": "1",
+          "name": "Pushover account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "command": "=logger -p syslog.info --tag={{ $json.query.app.replace(' ','-') }} {{ JSON.parse($json.body.data).msg }}"
+      },
+      "id": "8e368177-5f2a-48e0-8f6d-bb4ec4a67019",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        760,
+        780
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-04-20T14:59:16.000Z",
+  "versionId": "381d2d16-50af-42d7-87c2-32bd78b24c57"
+}
