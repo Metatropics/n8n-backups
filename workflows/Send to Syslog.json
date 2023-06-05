@@ -1,0 +1,57 @@
+{
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-05-20T07:55:39.738Z",
+  "id": "3",
+  "name": "Send to Syslog",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "2f5c4f9e-3324-47ea-b89a-818108974d27",
+        "options": {}
+      },
+      "id": "f886ffe7-cc80-459e-8ae2-5361a8f0183c",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        460,
+        460
+      ],
+      "webhookId": "23a80969-8250-4c1c-b7b2-da18d0ca3ea7"
+    },
+    {
+      "parameters": {
+        "command": "=logger -p syslog.info --tag='{{ $json.query.app.replace(' ','-') }}'   {{ $json.body.msg }}"
+      },
+      "id": "f46cd630-ed4d-473b-b0da-47cb916f9c97",
+      "name": "Execute Command",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        760,
+        780
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-05-20T09:03:10.000Z",
+  "versionId": "d4e08786-44f5-4ac5-888e-79efbe945713"
+}
