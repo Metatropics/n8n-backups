@@ -244,11 +244,11 @@
   "settings": {},
   "staticData": {
     "node:Google Calendar Trigger": {
-      "lastTimeChecked": "2023-06-05T01:21:19Z"
+      "lastTimeChecked": "2023-06-06T19:00:51Z"
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-06-05T01:21:20.000Z",
+  "updatedAt": "2023-06-06T19:00:54.000Z",
   "versionId": "10b1e584-86db-425b-ab35-5fb08c9bb5c2"
 }
