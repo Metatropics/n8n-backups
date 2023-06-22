@@ -5,50 +5,26 @@
       "main": [
         [
           {
-            "node": "IF",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "IF": {
-      "main": [
-        [
-          {
-            "node": "Trello",
-            "type": "main",
-            "index": 0
-          },
-          {
             "node": "Pushover",
             "type": "main",
             "index": 0
-          }
-        ],
-        [
+          },
           {
-            "node": "HTTP Request1",
+            "node": "Log Message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Trello",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Trello": {
+    "Pushover": {
       "main": [
-        [
-          {
-            "node": "HTTP Request",
-            "type": "main",
-            "index": 0
-          },
-          {
-            "node": "Trello Checklist",
-            "type": "main",
-            "index": 0
-          }
-        ]
+        []
       ]
     }
   },
@@ -91,103 +67,6 @@
     },
     {
       "parameters": {
-        "conditions": {
-          "string": [
-            {
-              "value1": "={{ $json.organizer.email }}",
-              "operation": "notEqual",
-              "value2": "ahernandezr@gmail.com"
-            }
-          ]
-        }
-      },
-      "id": "8870e6e6-7909-43ba-8c70-ad34e5b176a3",
-      "name": "IF",
-      "type": "n8n-nodes-base.if",
-      "typeVersion": 1,
-      "position": [
-        460,
-        600
-      ]
-    },
-    {
-      "parameters": {
-        "listId": "5aa48604c9d79377c28c5b9b",
-        "name": "={{ $json.summary }}",
-        "description": "={{ $json.description }} \nOrganizer: {{ $json[\"organizer\"][\"email\"] }}\n\n",
-        "additionalFields": {
-          "due": "={{ $json.start.dateTime }}",
-          "pos": "top",
-          "idMembers": "59b092b58eb79fc316527b20",
-          "idLabels": "59b092c81314a33999763ab3",
-          "urlSource": "={{ $json.htmlLink }}"
-        }
-      },
-      "id": "db0d6969-c09b-49f9-b143-a85d87a6dd97",
-      "name": "Trello",
-      "type": "n8n-nodes-base.trello",
-      "typeVersion": 1,
-      "position": [
-        680,
-        600
-      ],
-      "credentials": {
-        "trelloApi": {
-          "id": "9",
-          "name": "Trello account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Log%20Message",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "input",
-              "value": "={\"message\":\"Trello card created: {{$json.name}}\",\"title\":\"New Trello Card from Calendar Event\", \"tag\":\"n8n\"}"
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "6d9fc158-eb3f-4656-ba4f-0035b3d8e083",
-      "name": "HTTP Request",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
-      "position": [
-        900,
-        600
-      ]
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Log%20Message",
-        "sendBody": true,
-        "bodyParameters": {
-          "parameters": [
-            {
-              "name": "input",
-              "value": "={\"message\":\"Trello card not created: self organized: {{ $node[\"Google Calendar Trigger\"].json.summary }}\",\"title\":\"New Trello Card from Calendar Event\", \"tag\":\"n8n\"} "
-            }
-          ]
-        },
-        "options": {}
-      },
-      "id": "b3b2de88-d61e-494f-8790-be17c523bf73",
-      "name": "HTTP Request1",
-      "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 3,
-      "position": [
-        720,
-        800
-      ]
-    },
-    {
-      "parameters": {
         "userKey": "QHZisq8iJ7ER6llndDxDcJBIrvkQo5",
         "message": "=Event: {{ $json.summary }}\nOrganizer: {{ $json.organizer.displayName }} <{{ $json.organizer.email }}>\nStarts: {{ DateTime.fromISO($json.start.dateTime).setZone('America/Mexico_City').format('fff') }}\nEnds: {{ DateTime.fromISO($json.end.dateTime).setZone('America/Mexico_City').format('fff') }}",
         "priority": 0,
@@ -214,41 +93,62 @@
     },
     {
       "parameters": {
-        "resource": "checklist",
-        "operation": "create",
-        "cardId": {
-          "__rl": true,
-          "value": "={{ $json.id }}",
-          "mode": "id"
+        "method": "POST",
+        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Log%20Message",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={\"message\":\"Trello card created:  {{$node['Google Calendar Trigger'].json.summary }}\",\"title\":\"New Trello Card from Calendar Event\", \"tag\":\"n8n\"}"
+            }
+          ]
         },
-        "name": "Checklist",
-        "additionalFields": {}
+        "options": {}
       },
-      "id": "2e9e8be2-afe7-43ab-8cc9-179ca199c9ef",
-      "name": "Trello Checklist",
-      "type": "n8n-nodes-base.trello",
-      "typeVersion": 1,
+      "id": "6d9fc158-eb3f-4656-ba4f-0035b3d8e083",
+      "name": "Log Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
       "position": [
-        1040,
-        860
-      ],
-      "credentials": {
-        "trelloApi": {
-          "id": "9",
-          "name": "Trello account"
-        }
-      }
+        900,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Send%20To%20Trello",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={\"message\":\"{{$node['Google Calendar Trigger'].json.summary}}\", \"startdate\":\"{{$node['Google Calendar Trigger'].json.start.dateTime}}\"}\n "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "78142665-c399-4807-afda-4cfd545d2440",
+      "name": "Send to Trello",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        620,
+        200
+      ]
     }
   ],
   "pinData": {},
   "settings": {},
   "staticData": {
     "node:Google Calendar Trigger": {
-      "lastTimeChecked": "2023-06-17T00:25:09Z"
+      "lastTimeChecked": "2023-06-21T23:04:05Z"
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-06-17T00:25:09.000Z",
-  "versionId": "9f49d21f-15a5-4125-bd78-284b84946067"
+  "updatedAt": "2023-06-21T23:04:05.000Z",
+  "versionId": "a9b5252a-4a7f-4125-9a6e-f240e4458a10"
 }
