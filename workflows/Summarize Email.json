@@ -1,0 +1,124 @@
+{
+  "active": true,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "Trello",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-06T02:52:31.697Z",
+  "id": "4PjVyZ0s9fUEz9TS",
+  "name": "Summarize Email",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "62bbf27d-7c52-48dd-aea6-045423c74cbb",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        420,
+        480
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "1",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "content": "=Summarize the following email message {\"email-message\":\"{{ $json.snippet }}\" } from \"{{ $json.From}}\" and respond only an JSON object with the following fields: {\"summary\": \"your summary here\", \"from\": \"{{$json.From}}\", \"to\":\"{{$json.To }}\", \"subject\":\"{{$json.Subject }}\", \"thedate\": \"{{ Date($json.internalDate) }}\" "
+            }
+          ]
+        },
+        "simplifyOutput": false,
+        "options": {}
+      },
+      "id": "3e4472b6-7031-4b42-be07-3d15997cd943",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        640,
+        500
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "UUoOav7Fb7ZqS5VR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "listId": "64a655baa8311066a076f856",
+        "name": "={{ JSON.parse($json.choices[0].message.content).from }}",
+        "description": "=Received: \"{{ Date($('Gmail Trigger').item.json.internalDate) }}\"\n\nSubject: \"{{ JSON.parse($json.choices[0].message.content).subject }}\"\n\nSummary: \"{{ JSON.parse($json.choices[0].message.content).summary }}\" ",
+        "additionalFields": {
+          "pos": "top"
+        }
+      },
+      "id": "87646907-879e-4baa-9496-62efdeda3e4c",
+      "name": "Trello",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        820,
+        700
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "pj4rLCxI0ZjqkuwR",
+          "name": "Trello account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": {
+    "node:Gmail Trigger": {
+      "possibleDuplicates": [
+        "1892bebe7a128fe8"
+      ],
+      "lastTimeChecked": 1688659025
+    }
+  },
+  "tags": [],
+  "triggerCount": 1,
+  "updatedAt": "2023-07-06T15:57:42.000Z",
+  "versionId": "9d03f268-3841-4c5c-bde9-add7f14b0211"
+}
