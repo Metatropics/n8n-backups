@@ -1,0 +1,110 @@
+{
+  "active": false,
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "OpenAI",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-06T02:52:31.697Z",
+  "id": "4PjVyZ0s9fUEz9TS",
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {}
+      },
+      "id": "62bbf27d-7c52-48dd-aea6-045423c74cbb",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1,
+      "position": [
+        420,
+        480
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "1",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "chat",
+        "prompt": {
+          "messages": [
+            {
+              "content": "=Summarize the following {{ $json.labels[1].name }} email message from {{ $json.From }} and respond only an JSON object with 3 fields: {original-message, , your-summary, language}: {\"original-message\":\"{{ $json.snippet }}\" }"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "3e4472b6-7031-4b42-be07-3d15997cd943",
+      "name": "OpenAI",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [
+        620,
+        480
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": "UUoOav7Fb7ZqS5VR",
+          "name": "OpenAi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Speak%20Text",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ search(original-message,$json.message.content) }}",
+        "options": {}
+      },
+      "id": "ff3151f6-baf4-4ad7-a1c2-7e214282d7e7",
+      "name": "HTTP Request",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        840,
+        480
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-06T03:48:51.000Z",
+  "versionId": "79566652-2883-49a6-a4d9-4ec2b37b9946"
+}
