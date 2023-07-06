@@ -40,8 +40,8 @@
       ]
     }
   },
-  "createdAt": "2023-04-03T20:59:58.088Z",
-  "id": "1",
+  "createdAt": "2023-07-06T01:55:44.892Z",
+  "id": "9kPBrLvrvDvCatWX",
   "name": "Send to Logger",
   "nodes": [
     {
@@ -50,13 +50,13 @@
         "path": "2f5c4f9e-3324-47ea-b89a-818108974d26",
         "options": {}
       },
-      "id": "9e9e4d88-0179-4be6-aecc-02f79a2ade9f",
+      "id": "5a4bfd56-708f-4bc8-b32f-cadd954fd1ec",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        460,
-        460
+        -20,
+        420
       ],
       "webhookId": "2f5c4f9e-3324-47ea-b89a-818108974d26"
     },
@@ -75,13 +75,13 @@
         },
         "options": {}
       },
-      "id": "42ffc30f-0b35-44f0-b98a-d8d27793dee1",
+      "id": "9959e059-d0e6-423f-885b-f13d5825b0bb",
       "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        740,
-        520
+        260,
+        480
       ]
     },
     {
@@ -95,13 +95,13 @@
           ]
         }
       },
-      "id": "604b9651-80d3-4b94-95d4-1832444b4a05",
+      "id": "37ca8303-a051-45ee-99b2-f8f4c08fb671",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        980,
-        540
+        500,
+        500
       ]
     },
     {
@@ -111,13 +111,13 @@
         "priority": 0,
         "additionalFields": {}
       },
-      "id": "6dc86ae0-b054-47b7-9c71-d36df0c817a3",
+      "id": "459247d0-955c-4a8a-8b61-79d90ef454fc",
       "name": "Pushover",
       "type": "n8n-nodes-base.pushover",
       "typeVersion": 1,
       "position": [
-        1260,
-        600
+        780,
+        560
       ],
       "credentials": {
         "pushoverApi": {
@@ -130,13 +130,13 @@
       "parameters": {
         "command": "=logger -p syslog.info --tag={{ $json.query.app.replace(' ','-') }} {{ JSON.parse($json.body.data).msg }}"
       },
-      "id": "8e368177-5f2a-48e0-8f6d-bb4ec4a67019",
+      "id": "e132b635-ed56-4bcc-ba19-58e548c40109",
       "name": "Execute Command",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        760,
-        780
+        280,
+        740
       ]
     }
   ],
@@ -145,6 +145,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-04-20T14:59:16.000Z",
-  "versionId": "381d2d16-50af-42d7-87c2-32bd78b24c57"
+  "updatedAt": "2023-07-06T01:56:31.000Z",
+  "versionId": "bb9469b3-6fcf-4896-8faa-9d1a4b2458e8"
 }
