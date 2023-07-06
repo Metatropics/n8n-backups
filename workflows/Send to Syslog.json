@@ -13,8 +13,8 @@
       ]
     }
   },
-  "createdAt": "2023-05-20T07:55:39.738Z",
-  "id": "3",
+  "createdAt": "2023-07-06T01:57:04.928Z",
+  "id": "WH3nSotrjPaHpeUk",
   "name": "Send to Syslog",
   "nodes": [
     {
@@ -23,13 +23,13 @@
         "path": "2f5c4f9e-3324-47ea-b89a-818108974d27",
         "options": {}
       },
-      "id": "f886ffe7-cc80-459e-8ae2-5361a8f0183c",
+      "id": "1f40a2c2-7e1b-4f5a-9e5a-a4bf903bc9a5",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        460,
-        460
+        280,
+        280
       ],
       "webhookId": "23a80969-8250-4c1c-b7b2-da18d0ca3ea7"
     },
@@ -37,13 +37,13 @@
       "parameters": {
         "command": "=logger -p syslog.info --tag='{{ $json.query.app.replace(' ','-') }}'   {{ $json.body.msg.replace(\"'\",\"\") }}"
       },
-      "id": "f46cd630-ed4d-473b-b0da-47cb916f9c97",
+      "id": "1036c7f6-d258-44f2-bf19-4daf023ab86b",
       "name": "Execute Command",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        760,
-        780
+        580,
+        600
       ]
     }
   ],
@@ -52,6 +52,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-06-15T05:09:41.000Z",
-  "versionId": "f7db7511-af2e-4520-baeb-e6196b8675ac"
+  "updatedAt": "2023-07-06T01:57:10.000Z",
+  "versionId": "db952bda-70eb-4b6e-a252-de3bff6ae4e7"
 }
