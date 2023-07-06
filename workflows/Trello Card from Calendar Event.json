@@ -21,15 +21,10 @@
           }
         ]
       ]
-    },
-    "Pushover": {
-      "main": [
-        []
-      ]
     }
   },
-  "createdAt": "2023-04-03T21:01:16.192Z",
-  "id": "2",
+  "createdAt": "2023-07-05T08:41:51.130Z",
+  "id": "1",
   "name": "Trello Card from Calendar Event",
   "nodes": [
     {
@@ -50,17 +45,17 @@
         "triggerOn": "eventCreated",
         "options": {}
       },
-      "id": "3e91f07b-77a9-49db-b0ab-ddfbd8e79ee3",
+      "id": "06f6ce14-b821-4d40-80bc-ebdef3bdf619",
       "name": "Google Calendar Trigger",
       "type": "n8n-nodes-base.googleCalendarTrigger",
       "typeVersion": 1,
       "position": [
-        280,
-        580
+        0,
+        700
       ],
       "credentials": {
         "googleCalendarOAuth2Api": {
-          "id": "8",
+          "id": "DAeGux3sS3dHjuNl",
           "name": "Google Calendar account"
         }
       }
@@ -76,13 +71,13 @@
           "url_title": "Event Link"
         }
       },
-      "id": "668c723d-9324-4ba5-824c-5c91315246ec",
+      "id": "b329c8db-ef8a-4fec-b4f0-269ac2570085",
       "name": "Pushover",
       "type": "n8n-nodes-base.pushover",
       "typeVersion": 1,
       "position": [
-        940,
-        360
+        780,
+        620
       ],
       "credentials": {
         "pushoverApi": {
@@ -106,13 +101,13 @@
         },
         "options": {}
       },
-      "id": "6d9fc158-eb3f-4656-ba4f-0035b3d8e083",
+      "id": "841515f0-eb70-43b9-b30c-71a953794d62",
       "name": "Log Message",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        900,
-        600
+        740,
+        860
       ]
     },
     {
@@ -130,13 +125,13 @@
         },
         "options": {}
       },
-      "id": "78142665-c399-4807-afda-4cfd545d2440",
+      "id": "d5b23422-0464-4b9b-9ea2-090ad79ca9b2",
       "name": "Send to Trello",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        620,
-        200
+        460,
+        460
       ]
     }
   ],
@@ -144,11 +139,11 @@
   "settings": {},
   "staticData": {
     "node:Google Calendar Trigger": {
-      "lastTimeChecked": "2023-06-23T11:33:12Z"
+      "lastTimeChecked": "2023-07-06T01:53:51Z"
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-06-23T11:33:15.000Z",
-  "versionId": "a9b5252a-4a7f-4125-9a6e-f240e4458a10"
+  "updatedAt": "2023-07-06T01:53:51.000Z",
+  "versionId": "aa56e5a4-1414-41a5-9abc-cb3d33f7eaf5"
 }
