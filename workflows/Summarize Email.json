@@ -16,6 +16,33 @@
       "main": [
         [
           {
+            "node": "Get Labels",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trello": {
+      "main": [
+        []
+      ]
+    },
+    "Get Labels": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
             "node": "Trello",
             "type": "main",
             "index": 0
@@ -33,7 +60,9 @@
         "pollTimes": {
           "item": [
             {
-              "mode": "everyMinute"
+              "mode": "everyX",
+              "value": 10,
+              "unit": "minutes"
             }
           ]
         },
@@ -60,7 +89,7 @@
         "prompt": {
           "messages": [
             {
-              "content": "=Summarize the following email message {\"email-message\":\"{{ $json.snippet }}\" } from \"{{ $json.From}}\" and respond only an JSON object with the following fields: {\"summary\": \"your summary here\", \"from\": \"{{$json.From}}\", \"to\":\"{{$json.To }}\", \"subject\":\"{{$json.Subject }}\", \"thedate\": \"{{ Date($json.internalDate) }}\" "
+              "content": "=Analyze, summarize and prioritize the following email message {\"email-message\":\"{{ $json.snippet.trim() }}\" } from \"{{ $json.From}}\" and respond only an JSON object with the following fields: {\"summary\": (add your summary here), \"from\": \"{{$json.From}}\", \"to\":\"{{$json.To }}\", \"subject\":\"{{$json.Subject }}\", \"thedate\": \"{{ Date($json.internalDate) }}\", \"priority\": (add priority between Low, Medium, High here)}"
             }
           ]
         },
@@ -84,11 +113,12 @@
     },
     {
       "parameters": {
-        "listId": "64a655baa8311066a076f856",
-        "name": "={{ JSON.parse($json.choices[0].message.content).from }}",
-        "description": "=Received: \"{{ Date($('Gmail Trigger').item.json.internalDate) }}\"\n\nSubject: \"{{ JSON.parse($json.choices[0].message.content).subject }}\"\n\nSummary: \"{{ JSON.parse($json.choices[0].message.content).summary }}\" ",
+        "listId": "64a77cf5678be1c2e20cc86d",
+        "name": "={{ $('Gmail Trigger').item.json.From }}",
+        "description": "=Received: {{ Date($('Gmail Trigger').item.json.internalDate) }}\n\nSubject:{{ $('Gmail Trigger').item.json.Subject }}\n\nSummary: {{ JSON.parse($('OpenAI').item.json.choices[0].message.content).summary }}\n\nLabels: {{ $jmespath($('Gmail Trigger').item.json.labels,'[*].name') }} ",
         "additionalFields": {
-          "pos": "top"
+          "pos": "top",
+          "idLabels": "={{ $json.labelid }}"
         }
       },
       "id": "87646907-879e-4baa-9496-62efdeda3e4c",
@@ -96,8 +126,8 @@
       "type": "n8n-nodes-base.trello",
       "typeVersion": 1,
       "position": [
-        820,
-        700
+        1260,
+        560
       ],
       "credentials": {
         "trelloApi": {
@@ -105,6 +135,46 @@
           "name": "Trello account"
         }
       }
+    },
+    {
+      "parameters": {
+        "resource": "label",
+        "boardId": {
+          "__rl": true,
+          "value": "59b092c86abf74bd9de64a98",
+          "mode": "list",
+          "cachedResultName": "Personal",
+          "cachedResultUrl": "https://trello.com/b/r3MmDcm0/personal"
+        },
+        "additionalFields": {}
+      },
+      "id": "24518e77-16cd-45e6-bff3-5472c6cdf6fe",
+      "name": "Get Labels",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        820,
+        500
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "pj4rLCxI0ZjqkuwR",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst tmpreturn = [];\nconst txtpriority = JSON.parse($('OpenAI').item.json.choices[0].message.content).priority;\n\nfor (const item of $input.all()) {\n  console.log();\n  if (item.json.name == txtpriority ) \n  {\n    tmpreturn.push({\n      \"json\":\n        {\n          \"labelname\": item.json.name,\n          \"labelid\": item.json.id\n        },\n      \"pairedItem\": item.pairedItem.item\n    } )   \n  }\n}\nreturn tmpreturn;"
+      },
+      "id": "a853dad6-e05e-4fca-b1ed-33bc6deab82c",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        560
+      ]
     }
   ],
   "pinData": {},
@@ -112,13 +182,13 @@
   "staticData": {
     "node:Gmail Trigger": {
       "possibleDuplicates": [
-        "1892bebe7a128fe8"
+        "1892e7feb870a4ae"
       ],
-      "lastTimeChecked": 1688659025
+      "lastTimeChecked": 1688702282
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-07-06T15:57:42.000Z",
-  "versionId": "9d03f268-3841-4c5c-bde9-add7f14b0211"
+  "updatedAt": "2023-07-07T04:00:51.000Z",
+  "versionId": "b9851345-b01c-4714-acad-53643d463dd8"
 }
