@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Gmail Trigger": {
       "main": [
@@ -21,11 +21,6 @@
             "index": 0
           }
         ]
-      ]
-    },
-    "Trello": {
-      "main": [
-        []
       ]
     },
     "Get Labels": {
@@ -182,13 +177,13 @@
   "staticData": {
     "node:Gmail Trigger": {
       "possibleDuplicates": [
-        "189483d1a7b0399c"
+        "18948b2f41914929"
       ],
-      "lastTimeChecked": 1689134108
+      "lastTimeChecked": 1689141834
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-07-12T04:00:51.000Z",
-  "versionId": "b9851345-b01c-4714-acad-53643d463dd8"
+  "updatedAt": "2023-07-12T06:12:37.000Z",
+  "versionId": "eb76fe3c-7e44-4063-8c02-200f254ffae3"
 }
