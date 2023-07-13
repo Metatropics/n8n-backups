@@ -139,11 +139,11 @@
   "settings": {},
   "staticData": {
     "node:Google Calendar Trigger": {
-      "lastTimeChecked": "2023-07-06T01:53:51Z"
+      "lastTimeChecked": "2023-07-13T00:39:37Z"
     }
   },
   "tags": [],
   "triggerCount": 1,
-  "updatedAt": "2023-07-06T01:53:51.000Z",
+  "updatedAt": "2023-07-13T00:39:38.000Z",
   "versionId": "aa56e5a4-1414-41a5-9abc-cb3d33f7eaf5"
 }
