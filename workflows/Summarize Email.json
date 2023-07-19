@@ -73,7 +73,7 @@
       ],
       "credentials": {
         "gmailOAuth2": {
-          "id": "1",
+          "id": "y7GNNcjfG1PQyv6w",
           "name": "Gmail account"
         }
       }
@@ -101,7 +101,7 @@
       ],
       "credentials": {
         "openAiApi": {
-          "id": "UUoOav7Fb7ZqS5VR",
+          "id": "LYi7gb0cZpqrpITa",
           "name": "OpenAi account"
         }
       }
@@ -126,7 +126,7 @@
       ],
       "credentials": {
         "trelloApi": {
-          "id": "pj4rLCxI0ZjqkuwR",
+          "id": "bM93I4KXlkUWTuue",
           "name": "Trello account"
         }
       }
@@ -153,7 +153,7 @@
       ],
       "credentials": {
         "trelloApi": {
-          "id": "pj4rLCxI0ZjqkuwR",
+          "id": "bM93I4KXlkUWTuue",
           "name": "Trello account"
         }
       }
@@ -177,6 +177,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-07-19T13:43:34.489Z",
-  "versionId": "37b1d5db-42b0-42a8-9a71-4ec00f1c5262"
+  "updatedAt": "2023-07-19T14:05:58.000Z",
+  "versionId": "79d77aa4-6e17-41d0-971e-0073fb9e1c06"
 }
