@@ -1,0 +1,145 @@
+{
+  "active": false,
+  "connections": {
+    "Google Calendar Trigger": {
+      "main": [
+        [
+          {
+            "node": "Pushover",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Log Message",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send to Trello",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-19T13:43:03.352Z",
+  "id": "PxyKfZ4o8f3Eoq2U",
+  "name": "Trello Card From Calendar Event",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "calendarId": {
+          "__rl": true,
+          "value": "ahernandezr@gmail.com",
+          "mode": "list",
+          "cachedResultName": "Gmail"
+        },
+        "triggerOn": "eventCreated",
+        "options": {}
+      },
+      "id": "1a615a17-f4e5-411b-97b4-5487fa18fb42",
+      "name": "Google Calendar Trigger",
+      "type": "n8n-nodes-base.googleCalendarTrigger",
+      "typeVersion": 1,
+      "position": [
+        520,
+        460
+      ],
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "DAeGux3sS3dHjuNl",
+          "name": "Google Calendar account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "userKey": "QHZisq8iJ7ER6llndDxDcJBIrvkQo5",
+        "message": "=Event: {{ $json.summary }}\nOrganizer: {{ $json.organizer.displayName }} <{{ $json.organizer.email }}>\nStarts: {{ DateTime.fromISO($json.start.dateTime).setZone('America/Mexico_City').format('fff') }}\nEnds: {{ DateTime.fromISO($json.end.dateTime).setZone('America/Mexico_City').format('fff') }}",
+        "priority": 0,
+        "additionalFields": {
+          "title": "New Event Scheduled",
+          "url": "={{ $json.htmlLink }}",
+          "url_title": "Event Link"
+        }
+      },
+      "id": "61051dff-95f6-40e4-8118-b0fda79d119f",
+      "name": "Pushover",
+      "type": "n8n-nodes-base.pushover",
+      "typeVersion": 1,
+      "position": [
+        1300,
+        380
+      ],
+      "credentials": {
+        "pushoverApi": {
+          "id": "1",
+          "name": "Pushover account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Log%20Message",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={\"message\":\"Trello card created:  {{$node['Google Calendar Trigger'].json.summary }}\",\"title\":\"New Trello Card from Calendar Event\", \"tag\":\"n8n\"}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0e530768-ef1d-4f18-8cd0-eaa8956b6e19",
+      "name": "Log Message",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        1260,
+        620
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.pushcut.io/B6es7yetQzC164TgMjply/execute?shortcut=Send%20To%20Trello",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "input",
+              "value": "={\"message\":\"{{$node['Google Calendar Trigger'].json.summary}}\", \"startdate\":\"{{$node['Google Calendar Trigger'].json.start.dateTime}}\"}\n "
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "215f173e-8959-4199-8e6f-566c369c2adc",
+      "name": "Send to Trello",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [
+        980,
+        220
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-19T13:43:03.352Z",
+  "versionId": "9b22052d-1bd5-4f39-bd07-3d864328e8e3"
+}
