@@ -1,5 +1,5 @@
 {
-  "active": true,
+  "active": false,
   "connections": {
     "Webhook": {
       "main": [
@@ -40,8 +40,8 @@
       ]
     }
   },
-  "createdAt": "2023-07-06T01:55:44.892Z",
-  "id": "9kPBrLvrvDvCatWX",
+  "createdAt": "2023-07-19T13:44:46.950Z",
+  "id": "gHc1fYvqTd6n85DY",
   "name": "Send to Logger",
   "nodes": [
     {
@@ -50,13 +50,13 @@
         "path": "2f5c4f9e-3324-47ea-b89a-818108974d26",
         "options": {}
       },
-      "id": "5a4bfd56-708f-4bc8-b32f-cadd954fd1ec",
+      "id": "aae5d419-bcf8-4d0b-bce2-18033af42166",
       "name": "Webhook",
       "type": "n8n-nodes-base.webhook",
       "typeVersion": 1,
       "position": [
-        -20,
-        420
+        980,
+        220
       ],
       "webhookId": "2f5c4f9e-3324-47ea-b89a-818108974d26"
     },
@@ -75,13 +75,13 @@
         },
         "options": {}
       },
-      "id": "9959e059-d0e6-423f-885b-f13d5825b0bb",
+      "id": "bcf6a2b2-4964-47da-891b-3c13658b1535",
       "name": "HTTP Request",
       "type": "n8n-nodes-base.httpRequest",
       "typeVersion": 3,
       "position": [
-        260,
-        480
+        1260,
+        280
       ]
     },
     {
@@ -95,13 +95,13 @@
           ]
         }
       },
-      "id": "37ca8303-a051-45ee-99b2-f8f4c08fb671",
+      "id": "ab8f8036-eae4-4ce4-8d7a-e0f6aec9f8f0",
       "name": "IF",
       "type": "n8n-nodes-base.if",
       "typeVersion": 1,
       "position": [
-        500,
-        500
+        1500,
+        300
       ]
     },
     {
@@ -111,13 +111,13 @@
         "priority": 0,
         "additionalFields": {}
       },
-      "id": "459247d0-955c-4a8a-8b61-79d90ef454fc",
+      "id": "dae0220b-162c-4029-8472-823dc32cdedf",
       "name": "Pushover",
       "type": "n8n-nodes-base.pushover",
       "typeVersion": 1,
       "position": [
-        780,
-        560
+        1780,
+        360
       ],
       "credentials": {
         "pushoverApi": {
@@ -130,13 +130,13 @@
       "parameters": {
         "command": "=logger -p syslog.info --tag={{ $json.query.app.replace(' ','-') }} {{ JSON.parse($json.body.data).msg }}"
       },
-      "id": "e132b635-ed56-4bcc-ba19-58e548c40109",
+      "id": "94c7096f-e252-48c1-a749-3df6b0aea153",
       "name": "Execute Command",
       "type": "n8n-nodes-base.executeCommand",
       "typeVersion": 1,
       "position": [
-        280,
-        740
+        1280,
+        540
       ]
     }
   ],
@@ -144,7 +144,7 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "triggerCount": 1,
-  "updatedAt": "2023-07-06T01:56:31.000Z",
-  "versionId": "bb9469b3-6fcf-4896-8faa-9d1a4b2458e8"
+  "triggerCount": 0,
+  "updatedAt": "2023-07-19T13:44:46.950Z",
+  "versionId": "305e8d05-f3e5-40a5-bb43-0306c50090f2"
 }
