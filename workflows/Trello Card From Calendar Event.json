@@ -55,7 +55,7 @@
       ],
       "credentials": {
         "googleCalendarOAuth2Api": {
-          "id": "DAeGux3sS3dHjuNl",
+          "id": "4spYJkTap2lAwvkI",
           "name": "Google Calendar account"
         }
       }
@@ -81,7 +81,7 @@
       ],
       "credentials": {
         "pushoverApi": {
-          "id": "1",
+          "id": "vL3VW09wdIPSyPJs",
           "name": "Pushover account"
         }
       }
@@ -140,6 +140,6 @@
   "staticData": null,
   "tags": [],
   "triggerCount": 0,
-  "updatedAt": "2023-07-19T13:43:03.352Z",
-  "versionId": "9b22052d-1bd5-4f39-bd07-3d864328e8e3"
+  "updatedAt": "2023-07-19T14:14:02.000Z",
+  "versionId": "a9692a93-7960-47f7-8812-a2137c36a4b0"
 }
