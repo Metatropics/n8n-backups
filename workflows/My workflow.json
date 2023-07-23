@@ -1,29 +1,80 @@
 {
-  "active": false,
-  "connections": {},
-  "createdAt": "2023-07-07T03:14:47.787Z",
-  "id": "6eR0sOovq3MNDTVi",
+  "active": true,
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Execute Workflow",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Workflow": {
+      "main": [
+        [
+          {
+            "node": "Trello",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-22T17:55:33.702Z",
+  "id": "dqJGwkwFUpuD46Mz",
   "name": "My workflow",
   "nodes": [
     {
       "parameters": {
-        "events": [
-          "invitee.created"
-        ]
+        "workflowId": "LhTQ8ogj1rrBFmLw"
       },
-      "id": "85f39f87-6b60-4add-a020-63a7c0d459fa",
-      "name": "Calendly Trigger",
-      "type": "n8n-nodes-base.calendlyTrigger",
+      "id": "51f76d3a-42f8-4bdc-b4ac-dd78ce747aba",
+      "name": "Execute Workflow",
+      "type": "n8n-nodes-base.executeWorkflow",
       "typeVersion": 1,
       "position": [
-        780,
-        400
+        800,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "AddCardToTrello",
+        "options": {}
+      },
+      "id": "33965361-95b4-41ab-8c91-deceaf719532",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        620,
+        560
       ],
-      "webhookId": "8849ba9e-fa58-4d51-8452-c0b762159aa4",
+      "webhookId": "cda76934-a01d-4e03-8f0c-0a024e49c2ae"
+    },
+    {
+      "parameters": {
+        "listId": "={{ $json.id }}",
+        "name": "={{ $('Webhook').item.json.body.name }}",
+        "additionalFields": {}
+      },
+      "id": "9a0262ec-8757-4529-ab10-d051114f13f2",
+      "name": "Trello",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        1080,
+        560
+      ],
       "credentials": {
-        "calendlyApi": {
-          "id": "NCFcLbHmOH8f2YH9",
-          "name": "Calendly account"
+        "trelloApi": {
+          "id": "bM93I4KXlkUWTuue",
+          "name": "Trello account"
         }
       }
     }
@@ -32,7 +83,7 @@
   "settings": {},
   "staticData": null,
   "tags": [],
-  "triggerCount": 0,
-  "updatedAt": "2023-07-07T03:14:47.787Z",
-  "versionId": "8c81382b-1a2e-4878-beeb-58a1a0aa12c4"
+  "triggerCount": 1,
+  "updatedAt": "2023-07-22T21:00:27.000Z",
+  "versionId": "637a9a4a-509f-43bd-aaa3-d89166ca1ed2"
 }
