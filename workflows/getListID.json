@@ -1,0 +1,85 @@
+{
+  "active": false,
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Trello",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trello": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "createdAt": "2023-07-22T18:02:23.316Z",
+  "id": "LhTQ8ogj1rrBFmLw",
+  "name": "getListID",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "c299c326-ec6b-4854-a2cc-a7ee076dd142",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [
+        660,
+        460
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "list",
+        "operation": "getAll",
+        "id": "59b092c86abf74bd9de64a98",
+        "additionalFields": {}
+      },
+      "id": "d337dbd8-4272-4ddb-87be-403b03748970",
+      "name": "Trello",
+      "type": "n8n-nodes-base.trello",
+      "typeVersion": 1,
+      "position": [
+        880,
+        460
+      ],
+      "credentials": {
+        "trelloApi": {
+          "id": "bM93I4KXlkUWTuue",
+          "name": "Trello account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Loop over input items and add a new field called 'myNewField' to the JSON of each one\nconst thelist =  $item(\"0\").$node[\"Execute Workflow Trigger\"].json[\"body\"][\"list\"] \nconst cardname =  $item(\"0\").$node[\"Execute Workflow Trigger\"].json[\"body\"][\"name\"] \n \nfor (const item of $input.all()) {\n  if(item.json.name==thelist){\n    item.json.cardname = cardname;\n    return item;\n  }  \n}\n\nreturn [];"
+      },
+      "id": "e2af932c-c264-4b33-b88e-196928893110",
+      "name": "Code",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 1,
+      "position": [
+        1060,
+        460
+      ]
+    }
+  ],
+  "pinData": {},
+  "settings": {},
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2023-07-22T21:04:53.000Z",
+  "versionId": "ff6c79d5-7a91-43e5-a0da-601a3be77a25"
+}
